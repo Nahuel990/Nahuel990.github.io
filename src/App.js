@@ -223,7 +223,7 @@ const Portfolio = () => {
       period: 'Mar 2011 – Feb 2013',
       duration: '2 years',
       skills: ['Team Leadership', 'Coaching', 'VPN Installation/Configuration', 'Network Installation/Configuration (LAN, WAN, Routing)', 'Microtik', 'Microsoft Excel', 'SLA', 'ISO9001'],
-      description: 'I supervised a help desk team supporting Telecom Argentina's ADSL customers.'
+      description: 'I supervised a help desk team supporting Telecom Argentina\'s ADSL customers.'
     },
     {
       title: 'Career Break',
@@ -242,7 +242,7 @@ const Portfolio = () => {
       period: '2023 – 2024'
     },
     {
-      degree: "Bachelor's Degree, Computer Science",
+      degree: "Bachelor\'s Degree, Computer Science",
       school: 'Colegio Universitario IES',
       period: '2013 – 2018'
     }
