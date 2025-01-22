@@ -1,16 +1,117 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Briefcase, 
   GraduationCap, 
   Award, 
   Mail, 
-  Linkedin, 
+  Linkedin,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Gamepad,
+  Star
 } from 'lucide-react';
+
+const SkillCollectorGame = ({ onClose }) => {
+  const [score, setScore] = useState(0);
+  const [skills, setSkills] = useState([]);
+  const [gameActive, setGameActive] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(30);
+
+  useEffect(() => {
+    const generateSkill = () => {
+      const skillNames = ['Python', 'React', 'AWS', 'Testing', 'Azure', 'API'];
+      const skill = {
+        name: skillNames[Math.floor(Math.random() * skillNames.length)],
+        x: Math.random() * 80 + 10,
+        y: Math.random() * 80 + 10,
+        id: Date.now() + Math.random()
+      };
+      return skill;
+    };
+
+    const interval = setInterval(() => {
+      if (gameActive && skills.length < 5) {
+        setSkills(prev => [...prev, generateSkill()]);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [gameActive, skills.length]);
+
+  useEffect(() => {
+    if (timeLeft > 0 && gameActive) {
+      const timer = setTimeout(() => setTimeLeft(prev => prev - 1), 1000);
+      return () => clearTimeout(timer);
+    } else if (timeLeft === 0) {
+      setGameActive(false);
+    }
+  }, [timeLeft, gameActive]);
+
+  const collectSkill = (skillId) => {
+    setSkills(prev => prev.filter(skill => skill.id !== skillId));
+    setScore(prev => prev + 10);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-8 rounded-lg w-full max-w-lg relative">
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
+          ✕
+        </button>
+        
+        <h2 className="text-2xl font-bold mb-4">Skill Collector</h2>
+        <div className="flex justify-between mb-4">
+          <div>Score: {score}</div>
+          <div>Time: {timeLeft}s</div>
+        </div>
+
+        <div className="relative h-96 bg-blue-50 rounded-lg overflow-hidden">
+          {gameActive ? (
+            skills.map(skill => (
+              <div
+                key={skill.id}
+                className="absolute cursor-pointer transform hover:scale-110 transition-transform"
+                style={{ 
+                  left: `${skill.x}%`, 
+                  top: `${skill.y}%`,
+                  transform: 'translate(-50%, -50%)'
+                }}
+                onClick={() => collectSkill(skill.id)}
+              >
+                <div className="bg-blue-500 text-white px-3 py-1 rounded-full flex items-center">
+                  <Star className="w-4 h-4 mr-1" />
+                  {skill.name}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center flex-col">
+              <h3 className="text-2xl font-bold mb-4">Game Over!</h3>
+              <p className="text-xl mb-4">Final Score: {score}</p>
+              <button
+                onClick={() => {
+                  setScore(0);
+                  setTimeLeft(30);
+                  setGameActive(true);
+                }}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              >
+                Play Again
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Portfolio = () => {
   const [expandedJob, setExpandedJob] = useState(null);
+  const [showGame, setShowGame] = useState(false);
 
   const contactInfo = {
     email: 'nahuelnucera990@gmail.com',
@@ -71,24 +172,6 @@ const Portfolio = () => {
       description: 'I specialized in testing services and app automation for iOS and Android platforms.'
     },
     {
-      title: 'Test Automation Engineer',
-      company: 'Primotus',
-      location: 'US',
-      period: 'Oct 2018 – Nov 2018',
-      duration: '2 months',
-      skills: ['Appium', 'JavaScript', 'Protractor', 'Jira', 'BrowserStack'],
-      description: 'I worked as a contractor on a BPM project, focusing on automation tasks using Protractor for a hybrid app.'
-    },
-    {
-      title: 'Test Automation Engineer',
-      company: 'CrowdAr',
-      location: 'Argentina',
-      period: 'Jul 2018 – Sep 2018',
-      duration: '3 months',
-      skills: ['TestNG', 'Java', 'JBehave', 'Jira', 'SQL', 'NoSQL'],
-      description: 'I worked as a contractor on a fintech project, where my responsibilities included automation using a prebuilt framework.'
-    },
-    {
       title: 'QA Engineer',
       company: 'Santex',
       location: 'US',
@@ -123,24 +206,6 @@ const Portfolio = () => {
       duration: '1 year 3 months',
       skills: ['Time Management', 'Detail Orientation', 'Adaptability', 'Documentation', 'Cross-Browser Testing', 'Cross-Platform Testing'],
       description: 'As a freelancer tester, I contributed to web and mobile testing, covering cross-browser and cross-platform evaluations.'
-    },
-    {
-      title: 'QA Analyst',
-      company: 'Hublance',
-      location: 'Argentina',
-      period: 'May 2015 – Oct 2015',
-      duration: '6 months',
-      skills: ['SQL', 'SAP Fi', 'Cobol Mainframe', 'ASAP', 'Waterfall', 'Microsoft Excel', 'HP LoadRunner', 'ALM'],
-      description: 'I played a role in a project modernizing money flow between branches, transitioning from a Cobol system to a new SAP implementation.'
-    },
-    {
-      title: 'QA Analyst',
-      company: 'Globant',
-      location: 'Argentina',
-      period: 'Dec 2014 – May 2015',
-      duration: '6 months',
-      skills: ['SQL', 'API Testing', 'Postman', 'Microsoft Test Manager', 'Scrum'],
-      description: 'I developed and executed test plans, managed software environments, and utilized multiple testing tools.'
     },
     {
       title: 'Technical Support Engineer',
@@ -195,8 +260,19 @@ const Portfolio = () => {
       {/* Header/Hero Section */}
       <header className="bg-blue-600 text-white py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4">Nahuel Alejandro Nucera</h1>
-          <p className="text-xl mb-6">QA Engineer | Data and AI Enthusiast</p>
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-4xl font-bold mb-4">Nahuel Alejandro Nucera</h1>
+              <p className="text-xl mb-6">QA Engineer | Data and AI Enthusiast</p>
+            </div>
+            <button
+              onClick={() => setShowGame(true)}
+              className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg flex items-center transition-all duration-200"
+            >
+              <Gamepad className="w-5 h-5 mr-2" />
+              Play Game
+            </button>
+          </div>
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center">
               <Mail className="w-5 h-5 mr-2" />
@@ -211,8 +287,7 @@ const Portfolio = () => {
           </div>
         </div>
       </header>
-
-      {/* Main Content */}
+{/* Main Content */}
       <main className="max-w-4xl mx-auto py-12 px-4">
         {/* Experience Section */}
         <section className="mb-12">
@@ -299,6 +374,8 @@ const Portfolio = () => {
           </div>
         </section>
       </main>
+
+      {showGame && <SkillCollectorGame onClose={() => setShowGame(false)} />}
     </div>
   );
 };
