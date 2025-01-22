@@ -214,7 +214,7 @@ const Portfolio = () => {
       period: 'May 2013 – Dec 2014',
       duration: '1 year 8 months',
       skills: ['SQL', 'T-SQL', 'SLA', 'Kanban'],
-      description: 'I conducted database maintenance, managed software installations, and delivered customer support and training for the company's primary ERP product.'
+      description: 'I conducted database maintenance, managed software installations, and delivered customer support and training for the company\'s primary ERP product.'
     },
     {
       title: 'Customer Success Team Lead',
