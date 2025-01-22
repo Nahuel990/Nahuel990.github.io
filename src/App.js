@@ -8,7 +8,8 @@ import {
   ChevronDown,
   ChevronUp,
   Gamepad,
-  Star
+  Star,
+  Github
 } from 'lucide-react';
 
 const SkillCollectorGame = ({ onClose }) => {
@@ -113,9 +114,10 @@ const Portfolio = () => {
   const [expandedJob, setExpandedJob] = useState(null);
   const [showGame, setShowGame] = useState(false);
 
-  const contactInfo = {
+  const tInfo = {
     email: 'nahuelnucera990@gmail.com',
-    linkedin: 'linkedin.com/in/nahuelnucera'
+    linkedin: 'linkedin.com/in/nahuelnucera',
+    github: 'github.com/Nahuel990' 
   };
 
   const experience = [
@@ -276,12 +278,18 @@ const Portfolio = () => {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center">
               <Mail className="w-5 h-5 mr-2" />
-              <a href={`mailto:${contactInfo.email}`} className="hover:underline">{contactInfo.email}</a>
+              <a href={`mailto:${tInfo.email}`} className="hover:underline">{tInfo.email}</a>
             </div>
             <div className="flex items-center">
               <Linkedin className="w-5 h-5 mr-2" />
-              <a href={`https://${contactInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                {contactInfo.linkedin}
+              <a href={`https://${tInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {tInfo.linkedin}
+              </a>
+            </div>
+            <div className="flex items-center">
+              <Github className="w-5 h-5 mr-2" />
+              <a href={`https://${contactInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {contactInfo.github}
               </a>
             </div>
           </div>
