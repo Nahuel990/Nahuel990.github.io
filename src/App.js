@@ -16,11 +16,11 @@ const SkillCollectorGame = ({ onClose }) => {
   const [score, setScore] = useState(0);
   const [skills, setSkills] = useState([]);
   const [gameActive, setGameActive] = useState(true);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(20);
 
   useEffect(() => {
     const generateSkill = () => {
-      const skillNames = ['Python', 'React', 'AWS', 'Testing', 'Azure', 'API'];
+      const skillNames = ['Python', 'React', 'AWS', 'Testing', 'Azure', 'API', 'Pandas', 'Performance', 'Jmeter', 'Mobile', 'NodeJS', 'Spark', 'AI'];
       const skill = {
         name: skillNames[Math.floor(Math.random() * skillNames.length)],
         x: Math.random() * 80 + 10,
