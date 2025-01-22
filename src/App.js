@@ -288,8 +288,8 @@ const Portfolio = () => {
             </div>
             <div className="flex items-center">
               <Github className="w-5 h-5 mr-2" />
-              <a href={`https://${contactInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                {contactInfo.github}
+              <a href={`https://${tInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {tInfo.github}
               </a>
             </div>
           </div>
