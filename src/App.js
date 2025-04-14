@@ -125,7 +125,7 @@ const Portfolio = () => {
       title: 'ML QA Engineer',
       company: 'G42',
       location: 'Abu Dhabi, UAE',
-      period: 'July 2024 – Present',
+      period: 'July 2024 – April 2025',
       skills: ['Azure', 'Pandas', 'Apache Spark', 'Playwright', 'Python', 'FastAPI'],
       description: 'I leveraged Azure for the overall development/QA process and cloud integration. I conducted data testing using Pandas and Apache Spark, performed end-to-end testing with Playwright, and engaged in backend development using Python and FastAPI.'
     },
